@@ -1,10 +1,33 @@
-class TextAnalzer(object):
+class TextAnalyzer(object):
     
-    def __init__ (self, text):
+    def __init__(self, text):
         # remove punctuation
-        formattedText = text.replace('.','').replace('!','').replace('?','').replace(',','')
+        formattedText = text.replace('.', '').replace('!', '').replace('?', '').replace(',', '')
         
         # make text lowercase
         formattedText = formattedText.lower()
         
         self.fmtText = formattedText
+        
+    def freqAll(self):        
+        # split text into words
+        text_list = self.fmtText.split()
+        
+        # Create dictionary
+        words_dict = {}
+        for word in text_list:
+            if word not in words_dict:
+                words_dict[word] = 1
+            else:
+                words_dict[word] += 1
+                
+        return words_dict
+    
+    def freqOf(self, word):
+        # get frequency map
+        freqDict = self.freqAll()
+        
+        if word in freqDict:
+            return freqDict[word]
+        else:
+            return 0
